@@ -1,0 +1,39 @@
+[
+    {
+        "id": "background",
+        "type": "background",
+        "paint": {
+            "background-color": "hsl(47, 26%, 88%)"
+        }
+    },
+    {
+        "id": "osm-building",
+        "filter": [
+            "any",
+            [
+                "==",
+                "building",
+                "yes"
+            ]
+        ],
+        "type": "fill",
+        "source": "osm",
+        "layout": {},
+        "paint": {
+            "fill-color": "#800",
+            "fill-opacity": {
+                "base": 1,
+                "stops": [
+                    [
+                        13,
+                        0
+                    ],
+                    [
+                        18,
+                        1
+                    ]
+                ]
+            }
+        }
+    }
+]

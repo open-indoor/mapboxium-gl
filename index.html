@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Draw GeoJSON points</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        let layers;
+
+        const request = async () => {
+
+
+            const response = await fetch('/layers.json');
+            layers = await response.json();
+            console.log(layers);
+
+
+
+            blankStyle = {
+                "version": 8,
+                "name": "Blank",
+                "center": [0, 0],
+                "zoom": 0,
+                "sources": {
+                    'osm': {
+                        'type': 'geojson',
+                        // 'data': '/gare-de-l-est.geojson'
+                        'data': '/saint_remy.geojson'
+                    }
+                },
+                // "sprite": "file://roblabs.com/sprite",
+                // "glyphs": "file://roblabs.com/fonts/mapbox/{fontstack}/{range}.pbf",
+                "layers": layers,
+                "id": "blank"
+            }
+
+            mapboxgl.accessToken = '';
+
+
+            console.log('window.location.hash:', window.location.hash)
+            console.log('window.location.href:', window.location.href)
+            const hash = new URLSearchParams(window.location.hash.replace('#', ''));
+            console.log('hash:', hash)
+            let map = new mapboxgl.Map({
+                container: 'map',
+                // center: [0, 0],
+                // zoom: 0,
+                center: [2.07248, 48.70311],
+                zoom: 15,
+                style: blankStyle
+            });
+
+
+            map.addControl(new mapboxgl.NavigationControl());
+            map.addControl(new mapboxgl.FullscreenControl());
+
+
+
+
+        }
+        request();
+
+
+    </script>
+
+</body>
+
+</html>

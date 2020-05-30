@@ -1,0 +1,11 @@
+version: "3"
+services:
+  mapboxium-gl:
+    image: abiosoft/caddy:1.0.3-no-stats
+    ports:
+    - 8015:80
+    volumes:
+    - ./Caddyfile:/etc/Caddyfile
+    - .:/usr/share/caddy
+    # command: ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=true"]
+

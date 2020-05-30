@@ -1,0 +1,6 @@
+0.0.0.0:80 {
+    gzip
+    tls off
+    root /usr/share/caddy/
+    browse /
+}
